@@ -62,7 +62,7 @@ def build_ann_plotly_figure(df):
 
     fig.update_layout(
         width = 900,
-        height = 700,     # sửa heigh -> height
+        height = 700,
         
         scene=dict(
             xaxis_title="H/suTCA",
@@ -71,22 +71,20 @@ def build_ann_plotly_figure(df):
     
             # White background
             xaxis=dict(
-                backgroundcolor="#ffbebd",   # mặt YZ
+                backgroundcolor="#ffbebd",
                 gridcolor="lightgray"
             ),
             yaxis=dict(
-                backgroundcolor="#ffbebd",   # mặt XZ
+                backgroundcolor="#ffbebd",
                 gridcolor="lightgray"
             ),
             zaxis=dict(
-                backgroundcolor="#ffbebd",   # mặt XY
+                backgroundcolor="#ffbebd",
                 gridcolor="lightgray"
             ),
     
-            # CHO PHÉP SIZE THAY ĐỔI THEO width/height
             aspectmode="manual",
-    
-            # BẠN ĐIỀU CHỈNH SIZE 3 CHIỀU Ở ĐÂY
+
             aspectratio=dict(x=1.4, y=1, z=0.8)
         ),
     
@@ -97,8 +95,7 @@ def build_ann_plotly_figure(df):
         margin=dict(l=0, r=0, b=0, t=30),
         template="none"
     )
-    
-    # Góc nhìn đẹp như Matplotlib
+
     fig.update_scenes(camera=dict(eye=dict(x=1.4, y=1.4, z=1.0)))
     
     # Add manual point if available
@@ -219,7 +216,6 @@ st.title("Problem Definition")
 
 root_dir = Path(__file__).parent
 
-# 2 file ảnh cố định – bạn có thể đổi tên trực tiếp ở đây
 top_path    = (root_dir / "Problem_definition_1.svg").resolve()
 bottom_path = (root_dir / "Problem_definition_2.svg").resolve()
 
@@ -306,7 +302,6 @@ with c1:
     else:
         L_over_D = 0.0
     
-    # Hiển thị kết quả L/D kiểu auto (disabled)
     st.latex(r"\frac{L}{D}")
     st.text_input("L/D (auto = L / D)", value=f"{L_over_D:.4f}", disabled=True,label_visibility="collapsed")
 
@@ -502,4 +497,5 @@ if st.button("🎨 Plot 3D Surface"):
     df_plot = st.session_state.results.copy()
     fig3d = build_ann_plotly_figure(df_plot)
     st.plotly_chart(fig3d, use_container_width=True)
+
     
